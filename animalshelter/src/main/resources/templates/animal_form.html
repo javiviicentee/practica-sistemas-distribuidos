@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Animal Form</title>
+    <title>Formulario de Animal</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 40px; color: #333; }
         .form-group { margin-bottom: 15px; }
@@ -14,34 +14,34 @@
 </head>
 <body>
 
-    <h1>Animal Details</h1>
+    <h1>Detalles del Animal</h1>
 
     <form th:action="@{/animals/save}" th:object="${animal}" method="post">
         
         <input type="hidden" th:field="*{id}">
 
         <div class="form-group">
-            <label>Name:</label>
-            <input type="text" th:field="*{name}" required placeholder="e.g. Luna">
+            <label>Nombre:</label>
+            <input type="text" th:field="*{name}" required placeholder="Ej. Luna">
         </div>
         
         <div class="form-group">
-            <label>Species:</label>
-            <input type="text" th:field="*{species}" required placeholder="e.g. Cat">
+            <label>Especie:</label>
+            <input type="text" th:field="*{species}" required placeholder="Ej. Gato">
         </div>
         
         <div class="form-group">
-            <label>Age:</label>
+            <label>Edad:</label>
             <input type="number" th:field="*{age}" required min="0">
         </div>
         
         <div class="form-group">
-            <label>Is Adopted?:</label>
+            <label>¿Está adoptado?:</label>
             <input type="checkbox" th:field="*{adopted}">
         </div>
 
-        <button type="submit">Save Animal</button>
-        <a href="/animals">Cancel</a>
+        <button type="submit">Guardar Animal</button>
+        <a href="/animals">Cancelar</a>
     </form>
 
 </body>

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Animal Shelter - List</title>
+    <title>Refugio de Animales - Lista</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 40px; color: #333; }
         table { width: 80%; border-collapse: collapse; margin-top: 20px; }
@@ -14,19 +14,19 @@
 </head>
 <body>
 
-    <h1>Animals in the Shelter</h1>
+    <h1>Animales en el Refugio</h1>
     
-    <a href="/animals/new" class="btn">+ Add New Animal</a>
+    <a href="/animals/new" class="btn">+ Añadir Nuevo Animal</a>
 
     <table>
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Species</th>
-                <th>Age</th>
-                <th>Adopted</th>
-                <th>Actions</th>
+                <th>Nombre</th>
+                <th>Especie</th>
+                <th>Edad</th>
+                <th>Adoptado</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -35,12 +35,12 @@
                 <td th:text="${animal.name}">Rex</td>
                 <td th:text="${animal.species}">Dog</td>
                 <td th:text="${animal.age}">3</td>
-                <td th:text="${animal.adopted ? 'Yes' : 'No'}">No</td>
+                <td th:text="${animal.adopted ? 'Sí' : 'No'}">No</td>
                 <td>
-                    <a th:href="@{/animals/edit/{id}(id=${animal.id})}">Edit</a> | 
+                    <a th:href="@{/animals/edit/{id}(id=${animal.id})}">Editar</a> | 
                     
                     <form th:action="@{/animals/delete/{id}(id=${animal.id})}" method="post" style="display:inline;">
-                        <button type="submit" class="btn-danger">Delete</button>
+                        <button type="submit" class="btn-danger">Borrar</button>
                     </form>
                 </td>
             </tr>
