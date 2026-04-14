@@ -17,14 +17,14 @@ public class AnimalController {
     private AtomicLong nextId = new AtomicLong(1);
 
     public AnimalController() {
+        // Initial mock data in Spanish for the web UI
         long id1 = nextId.getAndIncrement();
-        animals.put(id1, new Animal(id1, "Rex", "Dog", 3, false));
+        animals.put(id1, new Animal(id1, "Rex", "Perro", 3, false));
 
         long id2 = nextId.getAndIncrement();
-        animals.put(id2, new Animal(id2, "Luna", "Cat", 2, true));
+        animals.put(id2, new Animal(id2, "Luna", "Gato", 2, true));
     }
 
-    // 1. Mostrar todos los animales (READ)
     @GetMapping("/animals")
     public String showAnimals(Model model) {
         Collection<Animal> animalList = animals.values();
@@ -32,28 +32,21 @@ public class AnimalController {
         return "animals_list";
     }
 
-    // 2. Mostrar el formulario para crear un animal nuevo (CREATE - paso 1)
     @GetMapping("/animals/new")
     public String newAnimalForm(Model model) {
-        model.addAttribute("animal", new Animal()); // Mandamos un animal vacío al formulario
+        model.addAttribute("animal", new Animal());
         return "animal_form";
     }
 
-    // 3. Guardar el animal del formulario (CREATE y UPDATE - paso 2)
     @PostMapping("/animals/save")
     public String saveAnimal(@ModelAttribute Animal animal) {
         if (animal.getId() == null) {
-            // Es un animal nuevo, le damos un ID
             animal.setId(nextId.getAndIncrement());
         }
-        // Guardamos o actualizamos en el mapa
         animals.put(animal.getId(), animal);
-        
-        // Redirigimos a la lista para ver los cambios
         return "redirect:/animals"; 
     }
 
-    // 4. Mostrar el formulario con los datos de un animal existente (UPDATE - paso 1)
     @GetMapping("/animals/edit/{id}")
     public String editAnimalForm(@PathVariable Long id, Model model) {
         Animal animal = animals.get(id);
@@ -64,10 +57,19 @@ public class AnimalController {
         return "redirect:/animals";
     }
 
-    // 5. Borrar un animal (DELETE)
     @PostMapping("/animals/delete/{id}")
     public String deleteAnimal(@PathVariable Long id) {
         animals.remove(id);
+        return "redirect:/animals";
+    }
+
+    // Handles the equivalent of a PATCH request through standard HTML forms
+    @PostMapping("/animals/{id}/toggle-adoption")
+    public String toggleAdoptionStatus(@PathVariable Long id) {
+        Animal animal = animals.get(id);
+        if (animal != null) {
+            animal.setAdopted(!animal.isAdopted());
+        }
         return "redirect:/animals";
     }
 }

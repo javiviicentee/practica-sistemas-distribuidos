@@ -7,11 +7,9 @@ public class Animal {
     private int age;
     private boolean adopted;
 
-    // Default constructor
     public Animal() {
     }
 
-    // Constructor with parameters
     public Animal(Long id, String name, String species, int age, boolean adopted) {
         this.id = id;
         this.name = name;
@@ -20,7 +18,6 @@ public class Animal {
         this.adopted = adopted;
     }
 
-    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
