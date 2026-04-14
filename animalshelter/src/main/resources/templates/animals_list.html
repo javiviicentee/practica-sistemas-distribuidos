@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Animal Shelter - List</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; color: #333; }
+        table { width: 80%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        .btn { padding: 8px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; }
+        .btn-danger { background-color: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;}
+    </style>
+</head>
+<body>
+
+    <h1>Animals in the Shelter</h1>
+    
+    <a href="/animals/new" class="btn">+ Add New Animal</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Species</th>
+                <th>Age</th>
+                <th>Adopted</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="animal : ${animals}">
+                <td th:text="${animal.id}">1</td>
+                <td th:text="${animal.name}">Rex</td>
+                <td th:text="${animal.species}">Dog</td>
+                <td th:text="${animal.age}">3</td>
+                <td th:text="${animal.adopted ? 'Yes' : 'No'}">No</td>
+                <td>
+                    <a th:href="@{/animals/edit/{id}(id=${animal.id})}">Edit</a> | 
+                    
+                    <form th:action="@{/animals/delete/{id}(id=${animal.id})}" method="post" style="display:inline;">
+                        <button type="submit" class="btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
