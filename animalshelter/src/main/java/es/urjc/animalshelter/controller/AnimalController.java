@@ -17,7 +17,7 @@ public class AnimalController {
     private AtomicLong nextId = new AtomicLong(1);
 
     public AnimalController() {
-        // Initial mock data in Spanish for the web UI
+        //Initial mock data for the web
         long id1 = nextId.getAndIncrement();
         animals.put(id1, new Animal(id1, "Rex", "Perro", 3, false));
 
@@ -63,7 +63,6 @@ public class AnimalController {
         return "redirect:/animals";
     }
 
-    // Handles the equivalent of a PATCH request through standard HTML forms
     @PostMapping("/animals/{id}/toggle-adoption")
     public String toggleAdoptionStatus(@PathVariable Long id) {
         Animal animal = animals.get(id);
