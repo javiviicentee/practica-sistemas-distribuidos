@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Hábitat</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; color: #333; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input[type="text"], input[type="number"] { width: 300px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        a { margin-left: 15px; color: #dc3545; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <h1>Detalles del Hábitat</h1>
+
+    <form th:action="@{/habitats/save}" th:object="${habitat}" method="post">
+        
+        <input type="hidden" th:field="*{id}">
+
+        <div class="form-group">
+            <label>Nombre:</label>
+            <input type="text" th:field="*{name}" required placeholder="Ej. Jaula Secundaria">
+        </div>
+        
+        <div class="form-group">
+            <label>Tipo:</label>
+            <input type="text" th:field="*{type}" required placeholder="Ej. Interior">
+        </div>
+        
+        <div class="form-group">
+            <label>Capacidad:</label>
+            <input type="number" th:field="*{capacity}" required min="0">
+        </div>
+        
+        <div class="form-group">
+            <label>¿Está disponible?:</label>
+            <input type="checkbox" th:field="*{available}">
+        </div>
+
+        <button type="submit">Guardar Hábitat</button>
+        <a href="/habitats">Cancelar</a>
+    </form>
+
+</body>
+</html>
