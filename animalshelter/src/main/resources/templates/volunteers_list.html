@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Refugio - Voluntarios</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        .btn { padding: 8px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; }
+        .btn-danger { background-color: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;}
+        .btn-warning { background-color: #ffc107; color: black; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; }
+        .nav-links { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="nav-links">
+        <a href="/animals">Ver Animales</a> | <strong>Ver Voluntarios</strong>
+    </div>
+
+    <h1>Equipo de Voluntarios</h1>
+    
+    <a href="/volunteers/new" class="btn">+ Añadir Nuevo Voluntario</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Activo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="volunteer : ${volunteers}">
+                <td th:text="${volunteer.id}">1</td>
+                <td th:text="${volunteer.name}">Ana</td>
+                <td th:text="${volunteer.email}">ana@email.com</td>
+                <td th:text="${volunteer.role}">Paseador</td>
+                <td th:text="${volunteer.active ? 'Sí' : 'No'}">Sí</td>
+                <td>
+                    <a th:href="@{/volunteers/edit/{id}(id=${volunteer.id})}">Editar</a> | 
+                    
+                    <form th:action="@{/volunteers/delete/{id}(id=${volunteer.id})}" method="post" style="display:inline;">
+                        <button type="submit" class="btn-danger">Borrar</button>
+                    </form> |
+                    
+                    <form th:action="@{/volunteers/{id}/toggle-status(id=${volunteer.id})}" method="post" style="display:inline;">
+                        <button type="submit" class="btn-warning">Cambiar Estado</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
