@@ -1,0 +1,14 @@
+$kind: http-request
+name: Create Habitat
+url: http://localhost:8080/api/habitats/
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "name": "Zona Reptiles",
+      "type": "Especial",
+      "capacity": 5,
+      "available": true
+    }
+order: 3420872941568675

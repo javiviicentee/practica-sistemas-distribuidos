@@ -62,6 +62,15 @@ public class HabitatRestController {
             if (updates.containsKey("available")) {
                 habitat.setAvailable((Boolean) updates.get("available"));
             }
+            if (updates.containsKey("name")) {
+                habitat.setName((String) updates.get("name"));
+            }
+            if (updates.containsKey("type")) {
+                habitat.setType((String) updates.get("type"));
+            }
+            if (updates.containsKey("capacity")) {
+                habitat.setCapacity(((Number) updates.get("capacity")).intValue());
+            }
             return ResponseEntity.ok(habitat);
         }
         return ResponseEntity.notFound().build();

@@ -1,0 +1,5 @@
+$kind: http-request
+name: View Habitats list
+url: http://localhost:8080/api/habitats/
+method: GET
+order: 1776417175914

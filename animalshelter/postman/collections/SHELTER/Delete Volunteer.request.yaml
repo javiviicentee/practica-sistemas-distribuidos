@@ -1,0 +1,5 @@
+$kind: http-request
+name: Delete Volunteer
+url: http://localhost:8080/api/volunteers/1
+method: DELETE
+order: 4431132230996632

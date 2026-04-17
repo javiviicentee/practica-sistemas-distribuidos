@@ -1,0 +1,20 @@
+$kind: http-request
+name: Create Animal
+url: http://localhost:8080/api/animals/
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "name": "Nala",
+        "species": "Gato",
+        "age": 1,
+        "adopted": false
+    }
+    {
+        "name": "Ramón",
+        "species": "Perro",
+        "age": 3,
+        "adopted": true
+    }
+order: 3554092530341382

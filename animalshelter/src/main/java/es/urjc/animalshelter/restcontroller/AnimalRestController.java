@@ -63,6 +63,15 @@ public class AnimalRestController {
             if (updates.containsKey("adopted")) {
                 animal.setAdopted((Boolean) updates.get("adopted"));
             }
+            if (updates.containsKey("name")) {
+                animal.setName((String) updates.get("name"));
+            }
+            if (updates.containsKey("species")) {
+                animal.setSpecies((String) updates.get("species"));
+            }
+            if (updates.containsKey("age")) {
+                animal.setAge(((Number) updates.get("age")).intValue());
+            }
             return ResponseEntity.ok(animal);
         }
         return ResponseEntity.notFound().build();

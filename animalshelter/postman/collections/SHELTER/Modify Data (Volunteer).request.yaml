@@ -1,0 +1,11 @@
+$kind: http-request
+name: Modify Data (Volunteer)
+url: http://localhost:8080/api/volunteers/2
+method: PATCH
+body:
+  type: json
+  content: |-
+    {
+        "role": "Directora"
+    }
+order: 3956203752511086

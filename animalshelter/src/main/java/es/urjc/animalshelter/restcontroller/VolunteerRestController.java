@@ -63,6 +63,15 @@ public class VolunteerRestController {
             if (updates.containsKey("active")) {
                 volunteer.setActive((Boolean) updates.get("active"));
             }
+            if (updates.containsKey("name")) {
+                volunteer.setName((String) updates.get("name"));
+            }
+            if (updates.containsKey("email")) {
+                volunteer.setEmail((String) updates.get("email"));
+            }
+            if (updates.containsKey("role")) {
+                volunteer.setRole((String) updates.get("role"));
+            }
             return ResponseEntity.ok(volunteer);
         }
         return ResponseEntity.notFound().build();

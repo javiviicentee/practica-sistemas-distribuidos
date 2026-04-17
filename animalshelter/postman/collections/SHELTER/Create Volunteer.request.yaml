@@ -1,0 +1,20 @@
+$kind: http-request
+name: Create Volunteer
+url: http://localhost:8080/api/volunteers/
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "name": "Sofia Lopez",
+        "email": "sofia@email.com",
+        "role": "Recepcionista",
+        "active": true
+    }
+    {
+        "name": "Marta Álvarez",
+        "email": "martita@caleruela.com",
+        "role": "Veterinaria",
+        "active": true
+    }
+order: 3453342488259431

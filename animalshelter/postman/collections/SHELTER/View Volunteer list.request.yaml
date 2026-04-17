@@ -1,0 +1,5 @@
+$kind: http-request
+name: View Volunteer list
+url: http://localhost:8080/api/volunteers/
+method: GET
+order: 2204045833800596

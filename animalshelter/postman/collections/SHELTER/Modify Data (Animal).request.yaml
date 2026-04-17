@@ -1,0 +1,11 @@
+$kind: http-request
+name: Modify Data (Animal)
+url: http://localhost:8080/api/animals/1
+method: PATCH
+body:
+  type: json
+  content: |-
+    {
+        "adopted": false
+    }
+order: 3955316474479404

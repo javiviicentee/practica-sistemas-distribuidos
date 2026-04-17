@@ -1,0 +1,5 @@
+$kind: http-request
+name: View Animals list
+url: http://localhost:8080/api/animals/
+method: GET
+order: 2692359633025910

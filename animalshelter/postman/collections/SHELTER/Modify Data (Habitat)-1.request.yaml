@@ -1,0 +1,11 @@
+$kind: http-request
+name: Modify Data (Habitat)
+url: http://localhost:8080/api/habitats/1
+method: PATCH
+body:
+  type: json
+  content: |-
+    {
+        "adopted": false
+    }
+order: 3706790326996225
