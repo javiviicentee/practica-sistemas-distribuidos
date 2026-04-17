@@ -1,8 +1,8 @@
-# 🐾 Refugio Patitas - Sistema de Gestión
+# Refugio Patitas - Sistema de Gestión
 
 Este proyecto es una aplicación web y API REST desarrollada en **Spring Boot (Java)** para la asignatura de **Sistemas Distribuidos**. Consiste en un sistema de gestión integral para un refugio de animales, permitiendo administrar la información de los **Animales**, los **Voluntarios** y los **Hábitats** o recintos.
 
-## 🚀 Características principales
+## Características principales
 
 El proyecto cuenta con las siguientes funcionalidades, implementadas con su capa de Servicios (`@Service`) para compartir los mismos datos tanto para el lado Web (MVC) como para el lado de la Interfaz (REST API):
 
@@ -22,7 +22,7 @@ El proyecto cuenta con las siguientes funcionalidades, implementadas con su capa
   - Interfaz construida con HTML y Thymeleaf.
   - Estilizada íntegramente con **Vanilla CSS**, asegurando un diseño ordenado, centrado y escalable sin depender de herramientas de terceros ni frameworks complejos. Incluye páginas de error dinámicas personalizadas (404).
 
-## 🧰 Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 - **Java 21**
 - **Spring Boot 3.x**
@@ -32,7 +32,7 @@ El proyecto cuenta con las siguientes funcionalidades, implementadas con su capa
 
 *(Nota: Los datos tienen persistencia temporal en memoria operativa concurrente `ConcurrentHashMap` utilizando `AtomicLong` para los auto-incrementos, cumpliendo con los requisitos iniciales del prototipo).*
 
-## 💻 Instrucciones de Uso
+## Instrucciones de Uso
 
 ### Ejecución Local
 
