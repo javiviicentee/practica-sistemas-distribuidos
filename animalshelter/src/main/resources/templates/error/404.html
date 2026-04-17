@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Página no encontrada - Error 404</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .error-container {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .error-code {
+            font-size: 100px;
+            color: #cc0000;
+            font-weight: bold;
+            margin: 0;
+        }
+        .error-message {
+            font-size: 24px;
+            color: #333333;
+            margin-bottom: 40px;
+        }
+        .error-desc {
+            color: #666666;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="error-container">
+            <h1 class="error-code">404</h1>
+            <h2 class="error-message">¡Página no encontrada!</h2>
+            <p class="error-desc">Parece que te has perdido. La ruta que estás buscando no existe en nuestro refugio de animales.</p>
+            <a href="/animals" class="btn" style="padding: 12px 25px; font-size: 18px;">Volver al inicio</a>
+        </div>
+    </div>
+</body>
+</html>

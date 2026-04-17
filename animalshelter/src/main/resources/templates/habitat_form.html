@@ -3,46 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <title>Formulario de Hábitat</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; color: #333; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-weight: bold; margin-bottom: 5px; }
-        input[type="text"], input[type="number"] { width: 300px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
-        button { padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
-        a { margin-left: 15px; color: #dc3545; text-decoration: none; }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-
-    <h1>Detalles del Hábitat</h1>
-
-    <form th:action="@{/habitats/save}" th:object="${habitat}" method="post">
-        
-        <input type="hidden" th:field="*{id}">
-
-        <div class="form-group">
-            <label>Nombre:</label>
-            <input type="text" th:field="*{name}" required placeholder="Ej. Jaula Secundaria">
-        </div>
-        
-        <div class="form-group">
-            <label>Tipo:</label>
-            <input type="text" th:field="*{type}" required placeholder="Ej. Interior">
-        </div>
-        
-        <div class="form-group">
-            <label>Capacidad:</label>
-            <input type="number" th:field="*{capacity}" required min="0">
-        </div>
-        
-        <div class="form-group">
-            <label>¿Está disponible?:</label>
-            <input type="checkbox" th:field="*{available}">
+    <div class="container">
+        <div style="margin-bottom: 25px; display: flex; align-items: center; gap: 15px;">
+            <span style="font-size: 40px;">🐾</span>
+            <div>
+                <h1 style="margin: 0; color: #0066cc;">Refugio Patitas</h1>
+                <p style="margin: 0; color: #666666; font-size: 14px;">Panel de Administración</p>
+            </div>
         </div>
 
-        <button type="submit">Guardar Hábitat</button>
-        <a href="/habitats">Cancelar</a>
-    </form>
+        <div class="nav-links">
+            <a href="/animals">Animales</a>
+            <a href="/volunteers">Voluntarios</a>
+            <a href="/habitats" class="active">Hábitats</a>
+        </div>
 
+        <div class="form-container">
+            <h1 style="margin-bottom: 25px; font-size: 24px;">Detalles del Hábitat</h1>
+
+            <form th:action="@{/habitats/save}" th:object="${habitat}" method="post">
+                <input type="hidden" th:field="*{id}">
+
+                <div class="form-group">
+                    <label>Nombre:</label>
+                    <input type="text" th:field="*{name}" required placeholder="Ej. Jaula Secundaria">
+                </div>
+                
+                <div class="form-group">
+                    <label>Tipo:</label>
+                    <input type="text" th:field="*{type}" required placeholder="Ej. Interior">
+                </div>
+                
+                <div class="form-group">
+                    <label>Capacidad:</label>
+                    <input type="number" th:field="*{capacity}" required min="0">
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" th:field="*{available}">
+                    <label style="display:inline;">¿Está disponible?</label>
+                </div>
+
+                <hr style="margin: 20px 0; border: 1px solid #ddd;">
+
+                <div class="form-group">
+                    <label>Coordinador (Voluntario al cuidado):</label>
+                    <select name="coordinatorId" style="width: 320px; padding: 8px; border: 1px solid #cccccc;">
+                        <option value="">-- Sin asignar --</option>
+                        <option th:each="vol : ${volunteers}" 
+                                th:value="${vol.id}" 
+                                th:text="${vol.name}"
+                                th:selected="${habitat.coordinator != null and habitat.coordinator.id == vol.id}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Animales alojados:</label>
+                    <span th:if="${animals.empty}" style="color:red; font-size:14px;">No hay animales registrados.</span>
+                    <div th:each="animal : ${animals}" style="margin-bottom: 5px;">
+                        <input type="checkbox" name="animalIds" th:value="${animal.id}" 
+                               th:checked="${habitat.animals != null and habitat.animals.contains(animal)}">
+                        <label th:text="${animal.name} + ' (' + ${animal.species} + ')'" style="display:inline; font-weight:normal;"></label>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <a href="/habitats" class="btn btn-outline">Cancelar</a>
+                    <button type="submit" class="btn btn-primary">Guardar Hábitat</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

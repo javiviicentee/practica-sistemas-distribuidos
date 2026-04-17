@@ -1,5 +1,5 @@
 $kind: http-request
 name: Delete Habitat
-url: http://localhost:8080/api/animals/3
+url: http://localhost:8080/api/habitats/2
 method: DELETE
 order: 4195280662389485

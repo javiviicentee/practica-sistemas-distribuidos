@@ -1,34 +1,23 @@
 package es.urjc.animalshelter.controller;
 
 import es.urjc.animalshelter.entity.Animal;
+import es.urjc.animalshelter.service.AnimalService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
-
 @Controller
 public class AnimalController {
 
-    private Map<Long, Animal> animals = new ConcurrentHashMap<>();
-    private AtomicLong nextId = new AtomicLong(1);
+    private final AnimalService animalService;
 
-    public AnimalController() {
-        //Initial mock data for the web
-        long id1 = nextId.getAndIncrement();
-        animals.put(id1, new Animal(id1, "Rex", "Perro", 3, false));
-
-        long id2 = nextId.getAndIncrement();
-        animals.put(id2, new Animal(id2, "Luna", "Gato", 2, true));
+    public AnimalController(AnimalService animalService) {
+        this.animalService = animalService;
     }
 
     @GetMapping("/animals")
     public String showAnimals(Model model) {
-        Collection<Animal> animalList = animals.values();
-        model.addAttribute("animals", animalList);
+        model.addAttribute("animals", animalService.findAll());
         return "animals_list";
     }
 
@@ -40,16 +29,13 @@ public class AnimalController {
 
     @PostMapping("/animals/save")
     public String saveAnimal(@ModelAttribute Animal animal) {
-        if (animal.getId() == null) {
-            animal.setId(nextId.getAndIncrement());
-        }
-        animals.put(animal.getId(), animal);
+        animalService.save(animal);
         return "redirect:/animals"; 
     }
 
     @GetMapping("/animals/edit/{id}")
     public String editAnimalForm(@PathVariable Long id, Model model) {
-        Animal animal = animals.get(id);
+        Animal animal = animalService.findById(id);
         if (animal != null) {
             model.addAttribute("animal", animal);
             return "animal_form";
@@ -59,13 +45,13 @@ public class AnimalController {
 
     @PostMapping("/animals/delete/{id}")
     public String deleteAnimal(@PathVariable Long id) {
-        animals.remove(id);
+        animalService.delete(id);
         return "redirect:/animals";
     }
 
     @PostMapping("/animals/{id}/toggle-adoption")
     public String toggleAdoptionStatus(@PathVariable Long id) {
-        Animal animal = animals.get(id);
+        Animal animal = animalService.findById(id);
         if (animal != null) {
             animal.setAdopted(!animal.isAdopted());
         }

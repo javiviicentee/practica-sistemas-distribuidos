@@ -4,8 +4,9 @@ url: http://localhost:8080/api/animals/1
 method: PATCH
 body:
   type: json
-  content: |-
+  content: |
     {
+        "name": "Tobías",
         "adopted": false
     }
 order: 3955316474479404

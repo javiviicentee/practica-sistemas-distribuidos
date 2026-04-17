@@ -1,50 +1,45 @@
 package es.urjc.animalshelter.restcontroller;
 
 import es.urjc.animalshelter.entity.Animal;
+import es.urjc.animalshelter.service.AnimalService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 @RequestMapping("/api/animals")
 public class AnimalRestController {
 
-    private Map<Long, Animal> animals = new ConcurrentHashMap<>();
-    private AtomicLong nextId = new AtomicLong(1);
+    private final AnimalService animalService;
 
-    public AnimalRestController() {
-        //Initial mock data for API testing
-        long id1 = nextId.getAndIncrement();
-        animals.put(id1, new Animal(id1, "Toby", "Perro", 5, false));
+    public AnimalRestController(AnimalService animalService) {
+        this.animalService = animalService;
     }
 
     @GetMapping("/")
     public Collection<Animal> getAllAnimals() {
-        return animals.values();
+        return animalService.findAll();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Animal> getAnimal(@PathVariable Long id) {
-        Animal animal = animals.get(id);
+        Animal animal = animalService.findById(id);
         return (animal != null) ? ResponseEntity.ok(animal) : ResponseEntity.notFound().build();
     }
 
     @PostMapping("/")
     public Animal createAnimal(@RequestBody Animal animal) {
-        animal.setId(nextId.getAndIncrement());
-        animals.put(animal.getId(), animal);
+        animalService.save(animal);
         return animal;
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Animal> updateAnimal(@PathVariable Long id, @RequestBody Animal updatedAnimal) {
-        if (animals.containsKey(id)) {
+        if (animalService.findById(id) != null) {
             updatedAnimal.setId(id);
-            animals.put(id, updatedAnimal);
+            animalService.save(updatedAnimal);
             return ResponseEntity.ok(updatedAnimal);
         }
         return ResponseEntity.notFound().build();
@@ -52,13 +47,13 @@ public class AnimalRestController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Animal> deleteAnimal(@PathVariable Long id) {
-        Animal removed = animals.remove(id);
+        Animal removed = animalService.delete(id);
         return (removed != null) ? ResponseEntity.ok(removed) : ResponseEntity.notFound().build();
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<Animal> patchAnimal(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
-        Animal animal = animals.get(id);
+        Animal animal = animalService.findById(id);
         if (animal != null) {
             if (updates.containsKey("adopted")) {
                 animal.setAdopted((Boolean) updates.get("adopted"));

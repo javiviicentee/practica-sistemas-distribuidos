@@ -5,13 +5,9 @@ method: POST
 body:
   type: json
   content: |-
+    
     {
-        "name": "Sofia Lopez",
-        "email": "sofia@email.com",
-        "role": "Recepcionista",
-        "active": true
-    }
-    {
+
         "name": "Marta Álvarez",
         "email": "martita@caleruela.com",
         "role": "Veterinaria",

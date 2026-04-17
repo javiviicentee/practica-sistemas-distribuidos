@@ -1,11 +1,18 @@
 package es.urjc.animalshelter.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Habitat {
     private Long id;
     private String name;
     private String type;
     private int capacity;
     private boolean available;
+
+    // Relaciones
+    private Volunteer coordinator;
+    private List<Animal> animals = new ArrayList<>();
 
     public Habitat() {
     }
@@ -32,4 +39,10 @@ public class Habitat {
 
     public boolean isAvailable() { return available; }
     public void setAvailable(boolean available) { this.available = available; }
+
+    public Volunteer getCoordinator() { return coordinator; }
+    public void setCoordinator(Volunteer coordinator) { this.coordinator = coordinator; }
+
+    public List<Animal> getAnimals() { return animals; }
+    public void setAnimals(List<Animal> animals) { this.animals = animals; }
 }

@@ -2,55 +2,71 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Refugio de Animales - Lista</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; color: #333; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
-        th { background-color: #f4f4f4; }
-        .btn { padding: 8px 15px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; }
-        .btn-danger { background-color: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;}
-        .btn-warning { background-color: #ffc107; color: black; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; }
-    </style>
+    <title>Refugio - Animales</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+    <div class="container">
+        <div style="margin-bottom: 25px; display: flex; align-items: center; gap: 15px;">
+            <span style="font-size: 40px;">🐾</span>
+            <div>
+                <h1 style="margin: 0; color: #0066cc;">Refugio Patitas</h1>
+                <p style="margin: 0; color: #666666; font-size: 14px;">Panel de Administración</p>
+            </div>
+        </div>
 
-    <h1>Animales en el Refugio</h1>
-    
-    <a href="/animals/new" class="btn">+ Añadir Nuevo Animal</a>
+        <div class="nav-links">
+            <a href="/animals" class="active">Animales</a>
+            <a href="/volunteers">Voluntarios</a>
+            <a href="/habitats">Hábitats</a>
+        </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Especie</th>
-                <th>Edad</th>
-                <th>Adoptado</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="animal : ${animals}">
-                <td th:text="${animal.id}">1</td>
-                <td th:text="${animal.name}">Rex</td>
-                <td th:text="${animal.species}">Perro</td>
-                <td th:text="${animal.age}">3</td>
-                <td th:text="${animal.adopted ? 'Sí' : 'No'}">No</td>
-                <td>
-                    <a th:href="@{/animals/edit/{id}(id=${animal.id})}">Editar</a> | 
-                    
-                    <form th:action="@{/animals/delete/{id}(id=${animal.id})}" method="post" style="display:inline;">
-                        <button type="submit" class="btn-danger">Borrar</button>
-                    </form> |
-                    
-                    <form th:action="@{/animals/{id}/toggle-adoption(id=${animal.id})}" method="post" style="display:inline;">
-                        <button type="submit" class="btn-warning">Cambiar Adopción</button>
-                    </form>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="page-header">
+            <h1>Animales en el Refugio</h1>
+            <a href="/animals/new" class="btn btn-primary">+ Añadir Nuevo Animal</a>
+        </div>
 
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Especie</th>
+                        <th>Edad</th>
+                        <th>Ingreso</th>
+                        <th>Adoptado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="animal : ${animals}">
+                        <td th:text="${animal.id}">1</td>
+                        <td th:text="${animal.name}">Rex</td>
+                        <td th:text="${animal.species}">Perro</td>
+                        <td th:text="${animal.age}">3</td>
+                        <td th:text="${animal.entryDate}">2026-04-15</td>
+                        <td>
+                            <span th:classappend="${animal.adopted} ? 'status-badge yes' : 'status-badge no'"
+                                  th:text="${animal.adopted ? 'Sí' : 'No'}">No</span>
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <a class="btn btn-sm btn-outline" th:href="@{/animals/edit/{id}(id=${animal.id})}">Editar</a>
+                                
+                                <form th:action="@{/animals/delete/{id}(id=${animal.id})}" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-sm btn-danger">Borrar</button>
+                                </form>
+                                
+                                <form th:action="@{/animals/{id}/toggle-adoption(id=${animal.id})}" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-sm btn-warning">Cambiar Adopción</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>
