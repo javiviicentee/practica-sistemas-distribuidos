@@ -14,11 +14,6 @@ public class AnimalService {
     private AtomicLong nextId = new AtomicLong(1);
 
     public AnimalService() {
-        long id1 = nextId.getAndIncrement();
-        animals.put(id1, new Animal(id1, "Rex", "Perro", 3, false, java.time.LocalDate.now().minusDays(5)));
-
-        long id2 = nextId.getAndIncrement();
-        animals.put(id2, new Animal(id2, "Luna", "Gato", 2, true, java.time.LocalDate.now().minusDays(2)));
     }
 
     public Collection<Animal> findAll() { return animals.values(); }

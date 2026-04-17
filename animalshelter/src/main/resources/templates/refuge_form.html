@@ -2,7 +2,8 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Formulario de Hábitat</title>
+    <title>Formulario del Refugio</title>
+    <link rel="icon" type="image/png" href="/images/logo.png">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
@@ -15,20 +16,21 @@
         </div>
 
         <div class="nav-links">
+            <a href="/">Inicio</a>
             <a href="/animals">Animales</a>
             <a href="/volunteers">Voluntarios</a>
-            <a href="/habitats" class="active">Hábitats</a>
+            <a href="/refuges" class="active">Refugios</a>
         </div>
 
         <div class="form-container">
-            <h1 style="margin-bottom: 25px; font-size: 24px;">Detalles del Hábitat</h1>
+            <h1 style="margin-bottom: 25px; font-size: 24px;">Detalles del Refugio</h1>
 
-            <form th:action="@{/habitats/save}" th:object="${habitat}" method="post">
+            <form th:action="@{/refuges/save}" th:object="${refuge}" method="post">
                 <input type="hidden" th:field="*{id}">
 
                 <div class="form-group">
                     <label>Nombre:</label>
-                    <input type="text" th:field="*{name}" required placeholder="Ej. Jaula Secundaria">
+                    <input type="text" th:field="*{name}" required placeholder="Ej. Refugio Felino">
                 </div>
                 
                 <div class="form-group">
@@ -41,21 +43,16 @@
                     <input type="number" th:field="*{capacity}" required min="0">
                 </div>
                 
-                <div class="form-group checkbox-group">
-                    <input type="checkbox" th:field="*{available}">
-                    <label style="display:inline;">¿Está disponible?</label>
-                </div>
-
                 <hr style="margin: 20px 0; border: 1px solid #ddd;">
 
                 <div class="form-group">
-                    <label>Coordinador (Voluntario al cuidado):</label>
-                    <select name="coordinatorId" style="width: 320px; padding: 8px; border: 1px solid #cccccc;">
+                    <label>Coordinador (Voluntario encargado):</label>
+                    <select name="coordinatorId">
                         <option value="">-- Sin asignar --</option>
                         <option th:each="vol : ${volunteers}" 
                                 th:value="${vol.id}" 
                                 th:text="${vol.name}"
-                                th:selected="${habitat.coordinator != null and habitat.coordinator.id == vol.id}">
+                                th:selected="${refuge.coordinator != null and refuge.coordinator.id == vol.id}">
                         </option>
                     </select>
                 </div>
@@ -65,17 +62,21 @@
                     <span th:if="${animals.empty}" style="color:red; font-size:14px;">No hay animales registrados.</span>
                     <div th:each="animal : ${animals}" style="margin-bottom: 5px;">
                         <input type="checkbox" name="animalIds" th:value="${animal.id}" 
-                               th:checked="${habitat.animals != null and habitat.animals.contains(animal)}">
-                        <label th:text="${animal.name} + ' (' + ${animal.species} + ')'" style="display:inline; font-weight:normal;"></label>
+                               th:checked="${refuge.animals != null and refuge.animals.contains(animal)}">
+                        <label th:text="${animal.name} + ' (' + ${animal.displaySpecies} + ')'" style="display:inline; font-weight:normal;"></label>
                     </div>
                 </div>
 
                 <div class="form-actions">
-                    <a href="/habitats" class="btn btn-outline">Cancelar</a>
-                    <button type="submit" class="btn btn-primary">Guardar Hábitat</button>
+                    <a href="/refuges" class="btn btn-outline">Cancelar</a>
+                    <button type="submit" class="btn btn-primary">Guardar Refugio</button>
                 </div>
             </form>
         </div>
     </div>
+    
+    <footer>
+        <p>&copy; 2026 Refugio Patitas - Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>

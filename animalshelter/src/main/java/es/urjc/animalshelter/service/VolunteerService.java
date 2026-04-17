@@ -14,8 +14,6 @@ public class VolunteerService {
     private AtomicLong nextId = new AtomicLong(1);
 
     public VolunteerService() {
-        long id1 = nextId.getAndIncrement();
-        volunteers.put(id1, new Volunteer(id1, "Laura Perez", "laura@api.com", "Limpieza", true));
     }
 
     public Collection<Volunteer> findAll() { return volunteers.values(); }

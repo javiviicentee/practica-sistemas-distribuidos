@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Formulario de Animal</title>
+    <link rel="icon" type="image/png" href="/images/logo.png">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
@@ -15,9 +16,10 @@
         </div>
 
         <div class="nav-links">
+            <a href="/">Inicio</a>
             <a href="/animals" class="active">Animales</a>
             <a href="/volunteers">Voluntarios</a>
-            <a href="/habitats">Hábitats</a>
+            <a href="/refuges">Refugios</a>
         </div>
 
         <div class="form-container">
@@ -34,7 +36,17 @@
                 
                 <div class="form-group">
                     <label>Especie:</label>
-                    <input type="text" th:field="*{species}" required placeholder="Ej. Gato">
+                    <select th:field="*{species}" id="speciesSelect" required>
+                        <option value="">-- Selecciona Especie --</option>
+                        <option th:each="specie : ${speciesList}"
+                                th:value="${specie}"
+                                th:text="${specie.name()}"></option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="customSpeciesDiv" style="display: none;">
+                    <label>Especie (Otra):</label>
+                    <input type="text" th:field="*{customSpecies}" id="customSpeciesInput" placeholder="Ej. Huron">
                 </div>
                 
                 <div class="form-group">
@@ -42,11 +54,6 @@
                     <input type="number" th:field="*{age}" required min="0">
                 </div>
                 
-                <div class="form-group checkbox-group">
-                    <input type="checkbox" th:field="*{adopted}">
-                    <label>¿Está adoptado?</label>
-                </div>
-
                 <div class="form-actions">
                     <a href="/animals" class="btn btn-outline">Cancelar</a>
                     <button type="submit" class="btn btn-primary">Guardar Animal</button>
@@ -54,5 +61,31 @@
             </form>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var speciesSelect = document.getElementById('speciesSelect');
+            var customSpeciesDiv = document.getElementById('customSpeciesDiv');
+            var customSpeciesInput = document.getElementById('customSpeciesInput');
+
+            function toggleCustomSpecies() {
+                if (speciesSelect.value === 'OTRO') {
+                    customSpeciesDiv.style.display = 'block';
+                    customSpeciesInput.setAttribute('required', 'required');
+                } else {
+                    customSpeciesDiv.style.display = 'none';
+                    customSpeciesInput.removeAttribute('required');
+                    customSpeciesInput.value = '';
+                }
+            }
+
+            speciesSelect.addEventListener('change', toggleCustomSpecies);
+            toggleCustomSpecies();
+        });
+    </script>
+    
+    <footer>
+        <p>&copy; 2026 Refugio Patitas - Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>

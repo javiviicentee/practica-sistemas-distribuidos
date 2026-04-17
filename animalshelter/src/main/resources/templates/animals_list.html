@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Refugio - Animales</title>
+    <link rel="icon" type="image/png" href="/images/logo.png">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
@@ -15,9 +16,10 @@
         </div>
 
         <div class="nav-links">
+            <a href="/">Inicio</a>
             <a href="/animals" class="active">Animales</a>
             <a href="/volunteers">Voluntarios</a>
-            <a href="/habitats">Hábitats</a>
+            <a href="/refuges">Refugios</a>
         </div>
 
         <div class="page-header">
@@ -42,7 +44,7 @@
                     <tr th:each="animal : ${animals}">
                         <td th:text="${animal.id}">1</td>
                         <td th:text="${animal.name}">Rex</td>
-                        <td th:text="${animal.species}">Perro</td>
+                        <td th:text="${animal.displaySpecies}">Perro</td>
                         <td th:text="${animal.age}">3</td>
                         <td th:text="${animal.entryDate}">2026-04-15</td>
                         <td>
@@ -67,5 +69,9 @@
             </table>
         </div>
     </div>
+    
+    <footer>
+        <p>&copy; 2026 Refugio Patitas - Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>

@@ -24,6 +24,7 @@ public class AnimalController {
     @GetMapping("/animals/new")
     public String newAnimalForm(Model model) {
         model.addAttribute("animal", new Animal());
+        model.addAttribute("speciesList", es.urjc.animalshelter.entity.Species.values());
         return "animal_form";
     }
 
@@ -38,6 +39,7 @@ public class AnimalController {
         Animal animal = animalService.findById(id);
         if (animal != null) {
             model.addAttribute("animal", animal);
+            model.addAttribute("speciesList", es.urjc.animalshelter.entity.Species.values());
             return "animal_form";
         }
         return "redirect:/animals";

@@ -62,7 +62,10 @@ public class AnimalRestController {
                 animal.setName((String) updates.get("name"));
             }
             if (updates.containsKey("species")) {
-                animal.setSpecies((String) updates.get("species"));
+                animal.setSpecies(es.urjc.animalshelter.entity.Species.valueOf((String) updates.get("species")));
+            }
+            if (updates.containsKey("customSpecies")) {
+                animal.setCustomSpecies((String) updates.get("customSpecies"));
             }
             if (updates.containsKey("age")) {
                 animal.setAge(((Number) updates.get("age")).intValue());

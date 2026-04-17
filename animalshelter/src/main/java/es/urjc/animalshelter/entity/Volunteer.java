@@ -1,5 +1,6 @@
 package es.urjc.animalshelter.entity;
 
+// entidad que modela a un voluntario asociado al refugio
 public class Volunteer {
     private Long id;
     private String name;
@@ -8,6 +9,7 @@ public class Volunteer {
     private boolean active;
 
     public Volunteer() {
+        this.active = true;
     }
 
     public Volunteer(Long id, String name, String email, String role, boolean active) {

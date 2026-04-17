@@ -2,7 +2,8 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Refugio - Hábitats</title>
+    <title>Refugios - Listado</title>
+    <link rel="icon" type="image/png" href="/images/logo.png">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
@@ -15,14 +16,15 @@
         </div>
 
         <div class="nav-links">
+            <a href="/">Inicio</a>
             <a href="/animals">Animales</a>
             <a href="/volunteers">Voluntarios</a>
-            <a href="/habitats" class="active">Hábitats</a>
+            <a href="/refuges" class="active">Refugios</a>
         </div>
 
         <div class="page-header">
-            <h1>Hábitats en el Refugio</h1>
-            <a href="/habitats/new" class="btn btn-primary">+ Añadir Nuevo Hábitat</a>
+            <h1>Zonas de Refugio</h1>
+            <a href="/refuges/new" class="btn btn-primary">+ Añadir Nuevo Refugio</a>
         </div>
 
         <div class="table-container">
@@ -40,28 +42,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="habitat : ${habitats}">
-                        <td th:text="${habitat.id}">1</td>
-                        <td th:text="${habitat.name}">Sabana</td>
-                        <td th:text="${habitat.type}">Exterior</td>
-                        <td><strong th:text="${habitat.capacity}">10</strong></td>
+                    <tr th:each="refuge : ${refuges}">
+                        <td th:text="${refuge.id}">1</td>
+                        <td th:text="${refuge.name}">Sabana</td>
+                        <td th:text="${refuge.type}">Exterior</td>
+                        <td><strong th:text="${refuge.capacity}">10</strong></td>
                         <td>
-                            <span th:classappend="${habitat.available} ? 'status-badge yes' : 'status-badge no'"
-                                  th:text="${habitat.available ? 'Disponible' : 'No Disponible'}">Sí</span>
+                            <span th:classappend="${refuge.available} ? 'status-badge yes' : 'status-badge no'"
+                                  th:text="${refuge.available ? 'Disponible' : 'No Disponible'}">Sí</span>
                         </td>
-                        <td th:text="${habitat.coordinator != null ? habitat.coordinator.name : 'Nadie'}">Juan</td>
+                        <td th:text="${refuge.coordinator != null ? refuge.coordinator.name : 'Nadie'}">Juan</td>
                         <td>
-                            <strong th:text="${habitat.animals != null ? habitat.animals.size() : 0}">0</strong> animales
+                            <strong th:text="${refuge.animals != null ? refuge.animals.size() : 0}">0</strong> animales
                         </td>
                         <td>
                             <div class="action-buttons">
-                                <a class="btn btn-sm btn-outline" th:href="@{/habitats/edit/{id}(id=${habitat.id})}">Editar</a>
+                                <a class="btn btn-sm btn-outline" th:href="@{/refuges/edit/{id}(id=${refuge.id})}">Editar</a>
                                 
-                                <form th:action="@{/habitats/delete/{id}(id=${habitat.id})}" method="post" style="display:inline;">
+                                <form th:action="@{/refuges/delete/{id}(id=${refuge.id})}" method="post" style="display:inline;">
                                     <button type="submit" class="btn btn-sm btn-danger">Borrar</button>
                                 </form>
                                 
-                                <form th:action="@{/habitats/{id}/toggle-availability(id=${habitat.id})}" method="post" style="display:inline;">
+                                <form th:action="@{/refuges/{id}/toggle-availability(id=${refuge.id})}" method="post" style="display:inline;">
                                     <button type="submit" class="btn btn-sm btn-warning">Disp.</button>
                                 </form>
                             </div>
@@ -71,5 +73,9 @@
             </table>
         </div>
     </div>
+    
+    <footer>
+        <p>&copy; 2026 Refugio Patitas - Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>

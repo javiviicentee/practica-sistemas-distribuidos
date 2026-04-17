@@ -3,7 +3,8 @@ package es.urjc.animalshelter.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Habitat {
+// clase entidad que representa fisicamente cada refugio o zona
+public class Refuge {
     private Long id;
     private String name;
     private String type;
@@ -11,13 +12,16 @@ public class Habitat {
     private boolean available;
 
     // Relaciones
+    // volunteer encargado en exclusiva de coordinar este refugio
     private Volunteer coordinator;
+    // coleccion de animales asignados actualmente al refugio
     private List<Animal> animals = new ArrayList<>();
 
-    public Habitat() {
+    public Refuge() {
+        this.available = true;
     }
 
-    public Habitat(Long id, String name, String type, int capacity, boolean available) {
+    public Refuge(Long id, String name, String type, int capacity, boolean available) {
         this.id = id;
         this.name = name;
         this.type = type;

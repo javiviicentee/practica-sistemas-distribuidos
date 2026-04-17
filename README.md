@@ -1,6 +1,6 @@
 # Refugio Patitas - Sistema de Gestión
 
-Este proyecto es una aplicación web y API REST desarrollada en **Spring Boot (Java)** para la asignatura de **Sistemas Distribuidos**. Consiste en un sistema de gestión integral para un refugio de animales, permitiendo administrar la información de los **Animales**, los **Voluntarios** y los **Hábitats** o recintos.
+Este proyecto es una aplicación web desarrollada en Spring Boot para la asignatura de Sistemas Distribuidos, perteneciente al Grado en Ingeniería Informática. Consiste en un sistema de gestión integral para un refugio de animales, permitiendo administrar la información de los Animales, los Voluntarios y los Hábitats o recintos.
 
 ## Características principales
 
